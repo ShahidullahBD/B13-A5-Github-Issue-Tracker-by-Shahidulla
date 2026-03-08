@@ -24,18 +24,145 @@
 </head>
 
 <body>
-    <div">
-        <header class="header-line px-20 py-4 flex justify-between items-center">
+    <div class="bg-gray-50">
+
+        <!-- Header Section -->
+        <header class="bg-white header-line px-20 py-4 sm:flex sm:justify-between items-center shadow">
             <div class="flex justify-between items-center gap-2">
-                <img class="w-[20px]" src="./assets/github-logo.png" alt="">
+                <img class="w-5" src="./assets/github-logo.png" alt="">
                 <h1>GitHub Issues Tracker</h1>
             </div>
             <div class="flex justify-between items-center gap-4">
-                <input type="text" placeholder="<i class='fa-solid fa-magnifying-glass'></i> Search Issues">
+                <div class="relative flex items-center">
+                    <i class='fa-solid fa-magnifying-glass absolute pl-2 text-gray-400 pointer-events-none'></i>
+                    <input id="search-input" class="py-1.5 rounded-sm pl-8" type="text" placeholder="Search Issues">
+                </div>
                 <button class="btn btn-primary">+ New Issue</button>
             </div>
         </header>
-        
+
+        <!-- Main Button Section -->
+        <section class="max-w-[1110px] mx-auto bg-white mt-15 p-6 border border-gray-50 shadow">
+            <div>
+                <!-- All Button -->
+                <button onclick="switchBtn('all-btn')"
+                id="all-btn" class="btn btn-primary px-10">All</button>
+
+                <!-- Open Button -->
+                <button onclick="switchBtn('openn-btn')"
+                id="openn-btn" class="btn btn-outline mx-2 px-10">Open</button>
+
+                <!-- Closed Button -->
+                <button onclick="switchBtn('closed-btn')"
+                id="closed-btn" class="btn btn-outline px-10">Closed</button>
+            </div>
+        </section>
+
+
+        <!-- Main Content Section -->
+        <main class="max-w-[1110px] mt-6 mx-auto bg-white border border-gray-50 shadow">
+
+            <!-- Content Heading Area -->
+            <div class="p-6 flex justify-between items-center border-b">
+                <div class="flex gap-2">
+                    <img class="w-[50px]" src="./assets/Aperture.png" alt="">
+                    <div>
+                        <h2 class="text-xl font-semibold text-black">
+                        <span 
+                        id="total-issues"
+                        >50</span> Issues</h2>
+                        <p>Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex gap-5">
+                    <div class="flex justify-between gap-2 items-center">
+                        <i id="open-icon" 
+                        class="fa-solid fa-circle text-green-100 text-sm"></i>
+                        <p class="text-black">Open</p>
+                    </div>
+                    <div class="flex justify-between gap-2 items-center">
+                        <i id="closed-icon" 
+                        class="fa-solid fa-circle text-purple-100 text-sm"></i>
+                        <p class="text-black">Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div>
+                <!-- Content -->
+                <div 
+                id="all-content-container"
+                class="m-6 gap-3 grid grid-cols-4">
+                    
+                </div>                
+                <div id="open-content-container"
+                class="m-6 gap-3 grid grid-cols-4 hidden">
+                   
+                </div>
+                <div id="closed-content-container"
+                class="m-6 gap-3 grid grid-cols-4 hidden">
+                   
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="hidden">
+                <!-- The button to open modal -->
+                <label for="my_modal_6" class="btn">open modal</label>
+
+                <!-- Put this part before </body> tag -->
+                <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+                <div class="modal" role="dialog">
+                    <div class="modal-box p-5 space-y-6">
+                        <div class="space-y-2">
+                            <h3 class="text-2xl font-bold text-black">Fix broken image uploads</h3>
+                            <div class="flex gap-8 items-center">
+                                <p class="py-1 px-5 bg-green-500 text-white text-xs rounded-xl">opened</p>
+                                <div>
+                                    <ul class="flex gap-8 list-disc text-xs">
+                                        <li>Opened by Fahim Ahmed</li>
+                                        <li>22/02/2026</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex gap-3">
+                                <div class="bg-[#feecec] rounded-xl text-[#f36c6c] flex items-center px-2 gap-1">
+                                    <i class="fa-solid fa-bug"></i>
+                                    <p class="py-1 text-xs">BUG</p>
+                                </div>
+                                <div class="bg-[#fff8db] rounded-xl text-[#d97706] flex items-center px-2 gap-1">
+                                    <i class="fa-solid fa-life-ring"></i>
+                                    <p class="py-1 text-xs">HELP WANTED</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the
+                                responsive behavior.</p>
+                        </div>
+                        <div class="grid grid-cols-2 text-left bg-[#f8fafc] p-4">
+                            <div>
+                                <p>Assignee:</p>
+                                <p class="font-semibold">Fahim Ahmed</p>
+                            </div>
+                            <div>
+                                <p>Assignee:</p>
+                                <div class="w-25 text-center">
+                                    <p class="bg-[#fff8db] py-1 text-xs px-2 rounded-xl text-[#d97706]">HELP WANTED</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-action">
+                            <label for="my_modal_6" class="btn btn-primary">Close!</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
 
