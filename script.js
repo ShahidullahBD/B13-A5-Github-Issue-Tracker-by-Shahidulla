@@ -37,11 +37,9 @@ function switchBtn(id) {
     //     }else if(b == 'openn-btn')
     
 
-    if (id == 'openn-btn') {
+    if (id == 'openn-btn') {        
         
-        openContent()
-        openContentContainer.innerHTML = '';
-
+        openContent()      
         
         openButton.classList.remove('btn-outline')
         openButton.classList.add(...openBtn)
@@ -56,13 +54,10 @@ function switchBtn(id) {
         openIssuesDot.classList.add('text-green-500')
         closedIssuesDot.classList.add('text-purple-100');
         
-        totalIssueCount.innerText = openContentContainer.children.length;        
         
     } else if (id == 'closed-btn') {
-
+               
         closedContent()
-        closedContentContainer.innerHTML = '';
-
         
         closedButton.classList.remove('btn-outline')
         closedButton.classList.add(...closedBtn)
@@ -77,13 +72,10 @@ function switchBtn(id) {
         openIssuesDot.classList.add('text-green-100')
         openIssuesDot.classList.remove('text-green-500')
         
-        totalIssueCount.innerText = closedContentContainer.children.length;        
         
-    } else if (id = 'all-btn') {
+    } else if (id = 'all-btn') {        
         
-        allContent() 
-        allContentContainer.innerHTML = '';
-
+        allContent()               
                 
         allButton.classList.remove('btn-outline')
         allButton.classList.add(...allBtn)
@@ -99,7 +91,6 @@ function switchBtn(id) {
         openIssuesDot.classList.add('text-green-100')
         openIssuesDot.classList.remove('text-green-500')
 
-        totalIssueCount.innerText = allContentContainer.children.length;        
 
     }
 }
@@ -109,7 +100,8 @@ function allContent() {
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
 
-        // console.log(data);
+        allContentContainer.innerHTML = '';
+
         data.data.forEach(issue => {
             // console.log(issue.description);
             const card = document.createElement('div');
@@ -144,6 +136,8 @@ function allContent() {
                     </div>
         `
             allContentContainer.appendChild(card);
+
+            totalIssueCount.innerText = allContentContainer.children.length;
         });
     })
 }
@@ -156,11 +150,13 @@ allContent()
 function openContent() {
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
-        data.data.forEach(issue => {
-        // console.log(issue.description);
+        
+        openContentContainer.innerHTML = '';            
+
+        data.data.forEach(issue => {        
+
         const card = document.createElement('div');
         if(issue.status==='open'){
-            // openContentContainer.innerHTML = '';
             card.innerHTML = `
             <div class="card bg-bage-100 shadow-lg rounded border-t-3 ${issue.status=='open'?'border-t-green-500':'border-t-purple-500'} h-full">
                             <div class="space-y-3 p-4">
@@ -191,6 +187,8 @@ function openContent() {
                         </div>
             `
                 openContentContainer.appendChild(card);
+
+                totalIssueCount.innerText = openContentContainer.children.length;
         }
         });
     })
@@ -200,11 +198,14 @@ function openContent() {
 function closedContent() {
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
+
+        closedContentContainer.innerHTML = '';
+
         data.data.forEach(issue => {
-        // console.log(issue.description);
-        const card = document.createElement('div');
-        if(issue.status==='closed'){
-            // openContentContainer.innerHTML = '';
+            
+            const card = document.createElement('div');
+            if(issue.status==='closed'){            
+            
             card.innerHTML = `
             <div class="card bg-bage-100 shadow-lg rounded border-t-3 ${issue.status=='open'?'border-t-green-500':'border-t-purple-500'} h-full">
                             <div class="space-y-3 p-4">
@@ -235,6 +236,9 @@ function closedContent() {
                         </div>
             `
                 closedContentContainer.appendChild(card);
+
+                totalIssueCount.innerText = closedContentContainer.children.length;        
+                
         }
         });
     })
