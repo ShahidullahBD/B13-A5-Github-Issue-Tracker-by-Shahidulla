@@ -65,13 +65,12 @@
 - Each card shows:
   - Title
   - Description
-  - Status
-  - Category
+  - Status 
   - Author
   - Priority
   - Label
   - CreatedAt
-- Clicking on a tree name in a card will open a modal and show all the information about that Issue. 
+- Clicking on an issue  card will open a modal and show all the information about that Issue. 
 
 ### 🚀 Challenges
 
@@ -125,5 +124,4 @@ Password: admin123
 - **Live Site Link:**
 
 ---
-
 

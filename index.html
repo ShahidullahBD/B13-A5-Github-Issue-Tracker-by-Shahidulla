@@ -45,16 +45,13 @@
         <section class="max-w-[1110px] mx-auto bg-white mt-15 p-6 border border-gray-50 shadow">
             <div>
                 <!-- All Button -->
-                <button onclick="switchBtn('all-btn')"
-                id="all-btn" class="btn btn-primary px-10">All</button>
+                <button onclick="switchBtn('all-btn')" id="all-btn" class="btn btn-primary px-10">All</button>
 
                 <!-- Open Button -->
-                <button onclick="switchBtn('openn-btn')"
-                id="openn-btn" class="btn btn-outline mx-2 px-10">Open</button>
+                <button onclick="switchBtn('openn-btn')" id="openn-btn" class="btn btn-outline mx-2 px-10">Open</button>
 
                 <!-- Closed Button -->
-                <button onclick="switchBtn('closed-btn')"
-                id="closed-btn" class="btn btn-outline px-10">Closed</button>
+                <button onclick="switchBtn('closed-btn')" id="closed-btn" class="btn btn-outline px-10">Closed</button>
             </div>
         </section>
 
@@ -68,55 +65,47 @@
                     <img class="w-[50px]" src="./assets/Aperture.png" alt="">
                     <div>
                         <h2 class="text-xl font-semibold text-black">
-                        <span 
-                        id="total-issues"
-                        >50</span> Issues</h2>
+                            <span id="total-issues">50</span> Issues
+                        </h2>
                         <p>Track and manage your project issues</p>
                     </div>
                 </div>
                 <div class="flex gap-5">
                     <div class="flex justify-between gap-2 items-center">
-                        <i id="open-icon" 
-                        class="fa-solid fa-circle text-green-100 text-sm"></i>
+                        <i id="open-icon" class="fa-solid fa-circle text-green-100 text-sm"></i>
                         <p class="text-black">Open</p>
                     </div>
                     <div class="flex justify-between gap-2 items-center">
-                        <i id="closed-icon" 
-                        class="fa-solid fa-circle text-purple-100 text-sm"></i>
+                        <i id="closed-icon" class="fa-solid fa-circle text-purple-100 text-sm"></i>
                         <p class="text-black">Closed</p>
                     </div>
                 </div>
             </div>
 
             <!-- Content Area -->
-            <div>
+            <div id="content-area">
                 <!-- Content -->
-                <div 
-                id="all-content-container"
-                class="m-6 gap-3 grid grid-cols-4">
-                    
-                </div>                
-                <div id="open-content-container"
-                class="m-6 gap-3 grid grid-cols-4 hidden">
-                   
+                <div id="all-content-container" class="m-6 gap-3 grid grid-cols-4">
+
                 </div>
-                <div id="closed-content-container"
-                class="m-6 gap-3 grid grid-cols-4 hidden">
-                   
+                <div id="open-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
+
+                </div>
+                <div id="closed-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
+
                 </div>
             </div>
 
-            <!-- Modal -->
-            <div class="hidden">
-                <!-- The button to open modal -->
-                <label for="my_modal_6" class="btn">open modal</label>
-
-                <!-- Put this part before </body> tag -->
-                <input type="checkbox" id="my_modal_6" class="modal-toggle" />
-                <div class="modal" role="dialog">
-                    <div class="modal-box p-5 space-y-6">
+            <!-- Issue Details Modal -->
+            <div>
+                <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                    <!-- <div class="modal-box p-5 space-y-6">
                         <div class="space-y-2">
-                            <h3 class="text-2xl font-bold text-black">Fix broken image uploads</h3>
+                            <div class="flex justify-between">
+                                <h3 class="text-2xl font-bold text-black">Fix broken image uploads</h3>
+                                <p class="cursor-pointer text-red-500"
+                                onclick="document.getElementById('my_modal_5').close()">X</p>
+                            </div>
                             <div class="flex gap-8 items-center">
                                 <p class="py-1 px-5 bg-green-500 text-white text-xs rounded-xl">opened</p>
                                 <div>
@@ -157,16 +146,18 @@
                         </div>
 
                         <div class="modal-action">
-                            <label for="my_modal_6" class="btn btn-primary">Close!</label>
+                            <label onclick="document.getElementById('my_modal_5').close()"
+                            for="my_modal_6" class="btn btn-primary">Close!</label>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
+                </dialog>
+            </div>            
         </main>
     </div>
 
 
     <script src="./script.js"></script>
+    <script src="./modal.js"></script>
 </body>
 
 </html>
