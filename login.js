@@ -6,7 +6,7 @@ btnSingin.addEventListener('click', function () {
 
     if (user === 'admin' && pass === "admin123") {        
         alert('Sing in successful')
-        window.location.href ='index.html';
+        window.location.href ='home.html';
     }else{
         alert('Invalid credentials')
     }
