@@ -22,6 +22,17 @@ const searchContentContainer = document.getElementById('search-content-container
 const openIcon = './assets/Open-Status.png';
 const closedIcon = './assets/Closed-Status.png';
 
+const loadingSpinner = document.getElementById('loading-spinner');
+
+function showSpinner(status){
+    if(status==true){
+        loadingSpinner.classList.remove('hidden');       
+    }else{
+        loadingSpinner.classList.add('hidden');
+         }
+
+}
+
 
 function switchBtn(id) {        
 
@@ -95,6 +106,9 @@ function switchBtn(id) {
 
 
 function allContent() {
+
+    showSpinner(true)
+
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
 
@@ -138,6 +152,7 @@ function allContent() {
             totalIssueCount.innerText = allContentContainer.children.length;
         });
     })
+    showSpinner(false)
 }
 
 
@@ -145,7 +160,10 @@ allContent()
 
 
 
-function openContent() {
+function openContent() {    
+
+    showSpinner(true)
+    
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
 
@@ -188,12 +206,16 @@ function openContent() {
 
                 totalIssueCount.innerText = openContentContainer.children.length;
             }
-        });
-    })
+        });    
+    }) 
+    showSpinner(false)
 }
 
 
 function closedContent() {
+
+    showSpinner(true)
+
     const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url).then((res) => res.json()).then((data) => {
 
@@ -240,6 +262,7 @@ function closedContent() {
             }
         });
     })
+    showSpinner(false)
 }
 
 allContent()
@@ -247,6 +270,9 @@ allContent()
 const searchInput = document.getElementById('search-input');
 
 function searchResult(){
+
+    showSpinner(true)
+
     const inputValue = searchInput.value.trim().toLowerCase();
     console.log(inputValue);
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputValue}`;
@@ -295,5 +321,7 @@ function searchResult(){
             
         });
     })
+
+    showSpinner(false)
 }
 
