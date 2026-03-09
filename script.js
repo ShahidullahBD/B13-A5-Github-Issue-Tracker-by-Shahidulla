@@ -7,7 +7,6 @@ const totalIssueCount = document.getElementById('total-issues');
 const openIssuesDot = document.getElementById('open-icon');
 const closedIssuesDot = document.getElementById('closed-icon');
 
-
 let currentBtn = 'all-btn';
 const allBtn = ['btn-primary'];
 const openBtn = ['btn-success'];
@@ -15,27 +14,16 @@ const closedBtn = ['bg-purple-500'];
 
 
 const allContentContainer = document.getElementById('all-content-container');
-// console.log(allContentContainer);
 const openContentContainer = document.getElementById('open-content-container');
 const closedContentContainer = document.getElementById('closed-content-container');
+const searchContentContainer = document.getElementById('search-content-container');
 
 
 const openIcon = './assets/Open-Status.png';
 const closedIcon = './assets/Closed-Status.png';
 
 
-
-function switchBtn(id) {
-
-    // const btns = [all, openn, closed]
-
-    // for(b of btns){
-    //     const btnName = document.getElementById(b+'-btn');
-    //     if(b == 'all-btn'){
-    //         btnName.classList.remove('btn-outline')
-    //         btnName.classList.add(...allBtnallBtn)
-    //     }else if(b == 'openn-btn')
-
+function switchBtn(id) {        
 
     if (id == 'openn-btn') {
 
@@ -49,6 +37,7 @@ function switchBtn(id) {
         allContentContainer.classList.add('hidden');
         openContentContainer.classList.remove('hidden');
         closedContentContainer.classList.add('hidden');
+        searchContentContainer.classList.add('hidden');
 
         openIssuesDot.classList.remove('text-green-100')
         openIssuesDot.classList.add('text-green-500')
@@ -66,6 +55,7 @@ function switchBtn(id) {
         closedContentContainer.classList.remove('hidden');
         openContentContainer.classList.add('hidden');
         allContentContainer.classList.add('hidden');
+        searchContentContainer.classList.add('hidden');
 
         closedIssuesDot.classList.remove('text-purple-100');
         closedIssuesDot.classList.add('text-purple-500');
@@ -73,7 +63,7 @@ function switchBtn(id) {
         openIssuesDot.classList.remove('text-green-500')
 
 
-    } else if (id = 'all-btn') {
+    } else if (id == 'all-btn') {
 
         allContent()
 
@@ -85,13 +75,21 @@ function switchBtn(id) {
         allContentContainer.classList.remove('hidden');
         openContentContainer.classList.add('hidden');
         closedContentContainer.classList.add('hidden');
-
+        searchContentContainer.classList.add('hidden');
+        
         closedIssuesDot.classList.remove('text-purple-500');
         closedIssuesDot.classList.add('text-purple-100');
         openIssuesDot.classList.add('text-green-100')
-        openIssuesDot.classList.remove('text-green-500')
-
-
+        openIssuesDot.classList.remove('text-green-500')        
+        
+    } else if (id == 'search-btn'){
+        // console.log('search btn clicked');
+        allContentContainer.classList.add('hidden');
+        openContentContainer.classList.add('hidden');
+        closedContentContainer.classList.add('hidden');        
+        
+        searchContentContainer.classList.remove('hidden');
+        searchResult()
     }
 }
 
@@ -243,3 +241,59 @@ function closedContent() {
         });
     })
 }
+
+allContent()
+
+const searchInput = document.getElementById('search-input');
+
+function searchResult(){
+    const inputValue = searchInput.value.trim().toLowerCase();
+    console.log(inputValue);
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputValue}`;
+    fetch(url).then((res) => res.json()).then((data) => {
+        
+        searchContentContainer.innerHTML = '';
+
+        data.data.forEach(issue => {
+            // console.log(issue);
+
+            const card = document.createElement('div');
+
+            card.innerHTML = `
+            <div onclick="issueDetails()" class="card bg-bage-100 shadow-lg rounded border-t-3 ${issue.status == 'open' ? 'border-t-green-500' : 'border-t-purple-500'} h-full">
+                            <div class="space-y-3 p-4 cursor-pointer">
+                                <div class="flex justify-between">
+                                    <img src=${issue.status == 'closed' ? closedIcon : openIcon} alt="">
+                                    <p class="py-1 px-5 bg-[#feecec] text-[#f36c6c] text-xs rounded-xl uppercase">${issue.priority}</p>
+                                </div>
+                                <div class="space-y-3">
+                                    <p class="text-sm text-black">${issue.title}</p>
+                                    <p class="text-xs line-clamp-2 overflow-hidden">${issue.description}</p>
+                                    <div class="flex gap-3">
+                                        <div class="bg-[#feecec] rounded-xl text-[#f36c6c] flex items-center px-2 gap-1">
+                                            <i class="fa-solid fa-bug"></i>
+                                            <p class="py-1 text-[10px] uppercase">${issue.labels[0]}</p>
+                                        </div>
+                                        <div class="bg-[#fff8db] rounded-xl text-[#d97706] flex items-center px-2 gap-1">
+                                            <i class="fa-solid fa-life-ring"></i>
+                                            <p class="py-1 text-[10px] uppercase">${issue.labels?.[1]}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="p-4 text-xs space-y-1 cursor-pointer">
+                                <p>by ${issue.author}</p>
+                                <p>${issue.createdAt}</p>
+                            </div>
+                        </div>
+            `
+                searchContentContainer.appendChild(card);
+
+                totalIssueCount.innerText = searchContentContainer.children.length;
+
+            
+        });
+    })
+}
+

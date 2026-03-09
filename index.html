@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
+    
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -37,7 +40,7 @@
                     <i class='fa-solid fa-magnifying-glass absolute pl-2 text-gray-400 pointer-events-none'></i>
                     <input id="search-input" class="py-1.5 rounded-sm pl-8" type="text" placeholder="Search Issues">
                 </div>
-                <button class="btn btn-primary">+ New Issue</button>
+                <button onclick="switchBtn('search-btn')" id="search-btn" class="btn btn-primary">Search</button>
             </div>
         </header>
 
@@ -93,6 +96,9 @@
                 </div>
                 <div id="closed-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
 
+                </div>
+                <div id="search-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
+                    
                 </div>
             </div>
 
@@ -157,7 +163,7 @@
 
 
     <script src="./script.js"></script>
-    <script src="./modal.js"></script>
+    <script src="./modal.js"></script>    
 </body>
 
 </html>
