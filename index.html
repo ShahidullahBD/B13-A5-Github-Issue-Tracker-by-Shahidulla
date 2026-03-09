@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B13-A5-Github-Issue-Tracker-by-Shahidulla</title>
+    <title>Login | GitHub Issues Tracker</title>
 
     <!-- daisyUI & Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -20,156 +19,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
-    
-    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
-
     <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <div class="bg-gray-50">
-
-        <!-- Header Section -->
-        <header class="bg-white header-line px-20 py-4 sm:flex sm:justify-between items-center shadow">
-            <div class="flex justify-between items-center gap-2">
-                <img class="w-5" src="./assets/github-logo.png" alt="">
-                <h1>GitHub Issues Tracker</h1>
+    <main class="w-[520px] mx-auto my-10 p-8 bg-gray-100 shadow-2xl">
+        <div class="text-center">
+            <img class="mx-auto max-w-20 pb-3" src="./assets/github-logo.png" alt="github-logo">
+            <h1 class="text-2xl font-semibold text-black">GitHub Issues Tracker</h1>
+            <p class="text-bage">Sign in to manage your issues</p>
+        </div>
+        <div class="space-y-2 mt-5">
+            <div class="space-y-1">
+                <label class="block font-bold text-black" for="">User name</label>
+                <input id="inpurUsername" 
+                class="w-full p-2 rounded-lg" type="text" placeholder="Enter user name">
+                <p class="text-blue-500 text-sm">Default: admin</p>
             </div>
-            <div class="flex justify-between items-center gap-4">
-                <div class="relative flex items-center">
-                    <i class='fa-solid fa-magnifying-glass absolute pl-2 text-gray-400 pointer-events-none'></i>
-                    <input id="search-input" class="py-1.5 rounded-sm pl-8" type="text" placeholder="Search Issues">
-                </div>
-                <button onclick="switchBtn('search-btn')" id="search-btn" class="btn btn-primary">Search</button>
+            <div class="space-y-1 mb-5">
+                <label class="block font-bold text-black" for="">Password</label>
+                <input id="inpurPassword" 
+                class="w-full p-2 rounded-lg" type="password" placeholder="Enter password">
+                <p class="text-blue-500 text-sm">Default: admin123</p>                
             </div>
-        </header>
-
-        <!-- Main Button Section -->
-        <section class="max-w-[1110px] mx-auto bg-white mt-15 p-6 border border-gray-50 shadow">
-            <div>
-                <!-- All Button -->
-                <button onclick="switchBtn('all-btn')" id="all-btn" class="btn btn-primary px-10">All</button>
-
-                <!-- Open Button -->
-                <button onclick="switchBtn('openn-btn')" id="openn-btn" class="btn btn-outline mx-2 px-10">Open</button>
-
-                <!-- Closed Button -->
-                <button onclick="switchBtn('closed-btn')" id="closed-btn" class="btn btn-outline px-10">Closed</button>
-            </div>
-        </section>
-
-
-        <!-- Main Content Section -->
-        <main class="max-w-[1110px] mt-6 mx-auto bg-white border border-gray-50 shadow">
-
-            <!-- Content Heading Area -->
-            <div class="p-6 flex justify-between items-center border-b">
-                <div class="flex gap-2">
-                    <img class="w-[50px]" src="./assets/Aperture.png" alt="">
-                    <div>
-                        <h2 class="text-xl font-semibold text-black">
-                            <span id="total-issues">50</span> Issues
-                        </h2>
-                        <p>Track and manage your project issues</p>
+            <div class="space-y-6 text-center">
+                <button id="btn-singin"
+                class="btn btn-primary w-full p-2">Sing in</button>
+                <div class="relative">
+                    <hr>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <p class="bg-gray-100 p-1">Or</p>
                     </div>
                 </div>
-                <div class="flex gap-5">
-                    <div class="flex justify-between gap-2 items-center">
-                        <i id="open-icon" class="fa-solid fa-circle text-green-100 text-sm"></i>
-                        <p class="text-black">Open</p>
-                    </div>
-                    <div class="flex justify-between gap-2 items-center">
-                        <i id="closed-icon" class="fa-solid fa-circle text-purple-100 text-sm"></i>
-                        <p class="text-black">Closed</p>
-                    </div>
+                <p class="text-sm">Demo Credentials:</p>
+                <div>
+                    <p class="font-bold"><span class="text-black">Username:</span> admin</p>
+                    <p class="font-bold"><span class="text-black">Password:</span> admin123</p>
                 </div>
             </div>
+        </div>
+    </main>
+    
 
-            <!-- Content Area -->
-            <div id="content-area">
-
-                <!-- Loading Spinner -->
-                 <div id="loading-spinner" class="flex justify-center mt-5 hidden">
-                    <span class="loading loading-spinner loading-xl"></span>
-                 </div>
-
-                <!-- Content -->
-                <div id="all-content-container" class="m-6 gap-3 grid grid-cols-4">
-
-                </div>
-                <div id="open-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
-
-                </div>
-                <div id="closed-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
-
-                </div>
-                <div id="search-content-container" class="m-6 gap-3 grid grid-cols-4 hidden">
-                    
-                </div>
-            </div>
-
-            <!-- Issue Details Modal -->
-            <div>
-                <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-                    <!-- <div class="modal-box p-5 space-y-6">
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <h3 class="text-2xl font-bold text-black">Fix broken image uploads</h3>
-                                <p class="cursor-pointer text-red-500"
-                                onclick="document.getElementById('my_modal_5').close()">X</p>
-                            </div>
-                            <div class="flex gap-8 items-center">
-                                <p class="py-1 px-5 bg-green-500 text-white text-xs rounded-xl">opened</p>
-                                <div>
-                                    <ul class="flex gap-8 list-disc text-xs">
-                                        <li>Opened by Fahim Ahmed</li>
-                                        <li>22/02/2026</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex gap-3">
-                                <div class="bg-[#feecec] rounded-xl text-[#f36c6c] flex items-center px-2 gap-1">
-                                    <i class="fa-solid fa-bug"></i>
-                                    <p class="py-1 text-xs">BUG</p>
-                                </div>
-                                <div class="bg-[#fff8db] rounded-xl text-[#d97706] flex items-center px-2 gap-1">
-                                    <i class="fa-solid fa-life-ring"></i>
-                                    <p class="py-1 text-xs">HELP WANTED</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the
-                                responsive behavior.</p>
-                        </div>
-                        <div class="grid grid-cols-2 text-left bg-[#f8fafc] p-4">
-                            <div>
-                                <p>Assignee:</p>
-                                <p class="font-semibold">Fahim Ahmed</p>
-                            </div>
-                            <div>
-                                <p>Assignee:</p>
-                                <div class="w-25 text-center">
-                                    <p class="bg-[#fff8db] py-1 text-xs px-2 rounded-xl text-[#d97706]">HELP WANTED</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-action">
-                            <label onclick="document.getElementById('my_modal_5').close()"
-                            for="my_modal_6" class="btn btn-primary">Close!</label>
-                        </div>
-                    </div> -->
-                </dialog>
-            </div>            
-        </main>
-    </div>
-
-
-    <script src="./script.js"></script>
-    <script src="./modal.js"></script>    
+    <script src="./login.js"></script>
 </body>
-
 </html>
